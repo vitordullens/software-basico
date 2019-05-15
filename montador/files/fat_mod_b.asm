@@ -1,12 +1,17 @@
 MOD_B: 	BEGIN
-FAT: 	EXTERN
-N: 		EXTERN
-		PUBLIC MOD_B
-SECTION TEXT
-		STORE AUX
+FAT: 	extern	
+L1: EQU 1
+n: 		EXTERN		
+PUBLIC MOD_B ;fdsafd
+   SECTION TEXT
+		STORE AUX	  	
+
+		
+ 
 		MULT N
-		STORE N
-		LOAD AUX
+		
+		STORE N ;fdsafdsa
+		   LOAD AUX
 		JMP FAT
 SECTION BSS
 AUX: 	SPACE

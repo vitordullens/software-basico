@@ -1,7 +1,10 @@
 #include <string>
 #include <fstream>
-// explicar funcao
+// troca todas as aparicoes de uma string por outra
 std::string replaceAll(std::string str, const std::string& from, const std::string& to);
 
-// idem
-void preProcessa(std::string saida, std::ifstream &arqEntrada);
+// retira comentarios, espacos e tabs
+void prepreProcessa(std::string saida, std::ifstream &arqEntrada);
+
+// blah
+void preProcessa(std::string entrada);

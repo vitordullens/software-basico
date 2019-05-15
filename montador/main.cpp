@@ -23,7 +23,8 @@ int main(int argc, char *argv[]){
   saida = entrada.substr(0, entrada.size()-3);
   saida.append("pre");
 
-  preProcessa(saida, arqEntrada);
+  prepreProcessa(saida, arqEntrada);
+  preProcessa(saida);
 
   arqEntrada.close();
 
