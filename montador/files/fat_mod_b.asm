@@ -1,11 +1,13 @@
 MOD_B: 	BEGIN
 FAT: 	extern	
 L1: EQU 1
+FAT: A
 n: 		EXTERN		
 PUBLIC MOD_B ;fdsafd
    SECTION TEXT
 		STORE AUX	  	
 
+COPY A B
 		
  
 		MULT N
