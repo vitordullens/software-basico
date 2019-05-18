@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
   saida.append("pre");
 
   prepreProcessa(saida, arqEntrada);
-  preProcessa(saida);
+  preProcessa2(saida);
 
   arqEntrada.close();
 
