@@ -1,5 +1,4 @@
 #include "pre-processador.h" // adiciona tambem a <string> e <fstream>
-#include <iostream>
 
 int main(int argc, char *argv[]){
   std::string entrada;
@@ -23,8 +22,9 @@ int main(int argc, char *argv[]){
   saida = entrada.substr(0, entrada.size()-3);
   saida.append("pre");
 
-  prepreProcessa(saida, arqEntrada);
-  preProcessa(saida);
+  preProcessa(saida, arqEntrada);
+  primeiraPassagem(saida);
+  segundaPassagem(saida);
 
   arqEntrada.close();
 

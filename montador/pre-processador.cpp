@@ -1,12 +1,4 @@
 #include "pre-processador.h"
-#include <iostream>
-#include <fstream>
-#include <map>
-#include <string.h>
-#include <sstream>
-#include <vector>
-#include <iterator>
-#include <algorithm>
 
 void print(const std::string i){
 	std::cout << i << '\n';
@@ -57,7 +49,7 @@ void erro(std::string mensagem, int linha){
 //tabela de simbolos
 std::map<std::string, int> tab_simb;
 
-void prepreProcessa(std::string saida, std::ifstream &arqEntrada){
+void preProcessa(std::string saida, std::ifstream &arqEntrada){
   std::string linha, linha_aux;
   std::ofstream arqSaida;
   int concat = 0;
@@ -116,7 +108,7 @@ void prepreProcessa(std::string saida, std::ifstream &arqEntrada){
   arqSaida.close();
 }
 
-void preProcessa(std::string entrada){
+void primeiraPassagem(std::string entrada){
   std::string str, rotulo, operacao, operandos;
   std::fstream arq;
   int linha = 0;
@@ -130,6 +122,8 @@ void preProcessa(std::string entrada){
   while(getline(arq, str)){
     linhas.push_back(str);
   }
+
+  arq.close();
 
   for(linha = 0; linha <= (int)linhas.size()-1; linha++){
     /*
@@ -332,6 +326,7 @@ void preProcessa(std::string entrada){
     else{
       erro("Instrucao ou diretiva invalida (ERRO LEXICO)", linha);
       linhas.erase(linhas.begin()+linha);
+      linha--;
     }
   }
 
@@ -342,9 +337,158 @@ void preProcessa(std::string entrada){
   std::cout << "Saida do programa:" << std::endl;
   std::for_each(linhas.begin(), linhas.end(), print);
 
+  //grava o arquivo pre processado
+  std::ofstream arq2;
+  arq2.open(entrada.c_str(), std::ofstream::trunc);
+  std::ostream_iterator<std::string> output_iterator(arq2, "\n");
+  std::copy(linhas.begin(), linhas.end(), output_iterator);
+  arq2.close();
+
+
   //imprime a tabela de simbolos, apenas para debug por enquanto
   std::cout << std::endl << std::endl << "Tabela de simbolos:" << std::endl;
   for (auto it = tab_simb.cbegin(); it != tab_simb.cend(); ++it) {
     std::cout << "{" << (*it).first << ": " << (*it).second << "}\n";
   }
+}
+
+void segundaPassagem(std::string entrada){
+  std::fstream arqPre;
+  std::string str;
+  std::vector<std::string> linhas;
+  int linha;
+  int endereco = 0;
+
+
+  arqPre.open(entrada.c_str());
+
+  while(getline(arqPre, str)){
+    linhas.push_back(str);
+  }
+  arqPre.close();
+
+  for(linha = 0; linha <= (int)linhas.size()-1; linha++){
+    size_t pos = 0;
+    std::string  operacao;
+
+    if(linhas[linha].find(":") != std::string::npos){
+      pos = linhas[linha].find(":");
+      operacao = linhas[linha];
+      operacao.erase(0, pos+2);
+      pos = operacao.find(" ");
+      operacao = operacao.substr(0,pos);
+      
+
+    }
+    //separa uma operacao que nao contem um label antes
+    else{
+      pos = linhas[linha].find(" ");
+      operacao = linhas[linha].substr(0,pos);
+    }
+    if(instrucoes[operacao] == true){
+      std::string parametro;
+      size_t end = linhas[linha].find("\n");
+      if(operacao == "ADD"){
+        pos = linhas[linha].find("ADD ");
+        parametro = linhas[linha].substr(pos+4, end);
+        std::cout << "Achou parametro " << parametro << " na operacao " << operacao << " linha " << linha << std::endl;
+        if(tab_simb.count(parametro)){
+          int x = tab_simb[parametro];
+          parametro = std::to_string((int)x);
+        }
+        else{
+          erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha);
+        }
+        linhas[linha] = "01 "+ parametro + " ";
+      }
+      else if(operacao == "SUB"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "MULT"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "DIV"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "JMP"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "JMPN"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "JMPP"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "JMPZ"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "COPY"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 3;
+      }
+      else if(operacao == "LOAD"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "STORE"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "INPUT"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "OUTPUT"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 2;
+      }
+      else if(operacao == "STOP"){
+        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //executa
+        endereco = endereco + 1;
+      }
+      else if (diretivas[operacao] == true) {
+        if(operacao == "SPACE"){
+          std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+          if(linhas[linha].find("SPACE ") != std::string::npos){
+            pos = linhas[linha].find("SPACE ");
+            int num = std::stoi(linhas[linha].substr(pos+6,end));
+          }
+        }
+        else if(operacao == "CONST"){
+          std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+          pos = linhas[linha].find("CONST ");
+          std::string num = linhas[linha].substr(pos+6,end);
+          int val;
+          if(num.find("0X") != std::string::npos) 
+            val = std::stoi(num,nullptr,16);
+          else
+            val = std::stoi(num);
+      }
+
+      }
+    }
+  }
+
+
+
 }

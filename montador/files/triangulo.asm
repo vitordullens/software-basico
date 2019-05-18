@@ -1,13 +1,16 @@
 SECTION TEXT
 		INPUT		B
-		TRIANGULO: EQU 0
+		TRIANGULO: EQU 1
 		INPUT		H
 Z:   	
 		LOAD		B
+		fdsa fdsa fdsa
 		MULT		H
-		fdsa fdsafdsa fds
+		ADD J
 		IF TRIANGULO
+		ADD DOIS
 AA: DIV		DOIS
+S: fdsa
 		STORE		R
 AA:		OUTPUT	R
 		STOP
