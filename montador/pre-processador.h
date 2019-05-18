@@ -9,7 +9,5 @@ void prepreProcessa(std::string saida, std::ifstream &arqEntrada);
 // blah
 void preProcessa(std::string entrada);
 
-void preProcessa2(std::string entrada);
-
 //funcao q imprime o erro
 void erro(std::string, int);
