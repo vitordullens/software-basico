@@ -2,20 +2,26 @@ SECTION TEXT
 		INPUT		B
 		TRIANGULO: EQU 1
 		INPUT		H
+		COPY B, H, H ;teste copy com 3 args
 Z:   	
 		LOAD		B
-		fdsa fdsa fdsa
+		COPY B, H
+		DIV zero ;divide por 0
+		fdsa fdsa fdsa ;coisas aleatorias
 		MULT		H
-		ADD J
+		ADD H B ;add com 2 args
 		IF TRIANGULO
 		ADD DOIS
 AA: DIV		DOIS
-S: fdsa
+S: fdsa ;coisas aleatorias
 		STORE		R
+		JMP B ;pulo para secao invalida
+		JMP Z
 AA:		OUTPUT	R
-		STOP
+		STOP B ;stop com argumentos
 SECTION DATA
 	B:		SPACE
 	H:		SPACE
 	R:		SPACE
-	DOIS:	CONST		-15
+	ZERO:	CONST		0
+	DOISF: const 0xFF ;hexadecimal
