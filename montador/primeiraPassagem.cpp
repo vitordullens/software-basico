@@ -10,6 +10,8 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
   size_t pos = 0;
   std::vector<std::string> linhas;
   arq.open(entrada.c_str());
+  std::vector<std::string> mnt;
+  std::map<std::string, std::string> mdt;
 
   //armazena cada linha do arquivo em um vetor de strings
   while(getline(arq, str)){
@@ -173,7 +175,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
         else
           val = std::stoi(num);
 
-          map_constante.insert (std::pair<std::string, int>(rotulo, val));
+        map_constante.insert (std::pair<std::string, int>(rotulo, val));
         
 
 
@@ -212,14 +214,115 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
       }
       else if(operacao == "MACRO"){
         std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //vai dar trabalho
-        //endereco = endereco + 0;
+        pos = linhas[linha].find(":");
+        rotulo = linhas[linha].substr(0,pos);
+        pos = linhas[linha].find("MACRO ");
+        std::string macro_def = linhas[linha]; //o que vai ser guardado na mnt
+        std::string macro_arg[4]; //vetor com os argumentos da macro
+        if(linhas[linha].find('&') == std::string::npos){ //verifica se a macro possui argumentos
+          macro_def = rotulo + ',' + "0";
+          mnt.push_back(macro_def);
+        }
+        else{ //trata macros com argumentos
+          int arg_num = 0; //numero de argumentos da macro
+          std::string arg[3]; //nome dos argumentos
+          int tam_arg; //numero de caracteres do argumento
+          pos = pos+6;
+          while(linhas[linha].find('&', pos) != std::string::npos && arg_num < 4){
+            if(linhas[linha].find(',', pos) != std::string::npos){
+              tam_arg = linhas[linha].find(',', pos) - pos;
+              macro_arg[arg_num] = linhas[linha].substr(pos, tam_arg);
+              pos = pos + tam_arg+2;
+            }
+            else{
+              tam_arg = linhas[linha].length() - pos;
+              macro_arg[arg_num] = linhas[linha].substr(pos, tam_arg);
+              pos = pos + tam_arg;
+            }
+            arg_num++;
+          }
+          //Considera no maximo 3 argumentos em uma macro
+          if(arg_num >= 4){
+            erro("Macro com mais de 3 argumentos (TIPO ERRO)", linha);
+            arg_num = 3;
+          }
+          //guarda a macro na mnt no formato: label,numero de args, arg1, arg2, arg3
+          macro_def = rotulo + "," + std::to_string(arg_num);
+          for(int i = 0; i<arg_num; i++){
+            macro_def = macro_def + "," + macro_arg[i];
+          }
+          mnt.push_back(macro_def);
+        }
+        linhas.erase(linhas.begin()+linha);
+        macro_def.clear();
+        int achou_end = 0;
+        for(int j = linha; j <= (int)linhas.size()-1; j++){
+          if(linhas[j].find("MACRO") != std::string::npos) break;
+          if(linhas[j].find("END") != std::string::npos){
+            achou_end = 1;
+          }
+        }
+        if(achou_end == 1){
+          while(linhas[linha] != "END"){
+            macro_def = macro_def + linhas[linha] + ";";
+            linhas.erase(linhas.begin()+linha);
+          }
+          linhas.erase(linhas.begin()+linha);
+          mdt.insert(std::pair<std::string, std::string>(rotulo, macro_def));
+        }
+        else{
+          mdt.erase(rotulo); //apaga macro sem end da mdt
+          mnt.pop_back(); //apaga macro sem end da mnt
+          erro("Macro sem END (TIPO ERRO)", linha);
+        }
       }
-      else if(operacao == "END"){
+      /*else if(operacao == "END"){
         std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         //marca o fim de uma macro
         //endereco = endereco + 0;
+      }*/
+    }
+    //verifica se eh um macro
+    else if(findSubVec(mdt, operacao) == 1) {
+      std::cout << "CHAMANDO MACRO " << operacao << std::endl;
+      int salva_linha = linha; //salva a linha na qual a macro vai ser expandida
+
+      //procura macro na mnt
+      int mnt_num = 0;
+      std::string arg1, arg2, arg3;
+      for(std::size_t i = 0; i < mnt.size(); ++i){
+        if(mnt[i].find(operacao) != std::string::npos){
+          mnt_num = i;
+          break;
+        }
       }
+      pos = mnt[mnt_num].find(",")+1;
+      //std::cout << "--------POS: " << pos << " " << mnt[mnt_num][pos] << std::endl;
+      //if(std::stoi(mnt[mnt_num][pos]) > 0){
+        //std::cout << "ARGS MAIOR Q ZERO" << std::endl;
+      //}
+
+      pos = mnt[mnt_num].find(",");
+      int num_arg = std::stoi(mnt[mnt_num].substr(pos+1, 1));
+
+      linhas.erase(linhas.begin()+linha);
+      std::string str_aux, str_aux2;
+      //procura definicao da macro na mdt
+      for (auto it = mdt.cbegin(); it != mdt.cend(); ++it) {
+        if((*it).first == operacao){
+          str_aux = (*it).second;
+        }
+      }
+      //expande a macro
+      while(str_aux.find(";") != std::string::npos){
+        pos = 0;
+        str_aux2 = str_aux.substr(pos, str_aux.find(";"));
+        linhas.insert(linhas.begin()+linha, str_aux2);
+        linha++;
+        pos = str_aux.find(";");
+        str_aux = str_aux.substr(pos+1, str_aux.find_last_of(";"));
+      }
+      linha = salva_linha - 1; //volta para a linha em que a macro for expandida
     }
     //diretiva ou instrucao invalida
     else{
@@ -247,6 +350,17 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
   //imprime a tabela de simbolos, apenas para debug por enquanto
   std::cout << std::endl << std::endl << "Tabela de simbolos:" << std::endl;
   for (auto it = tab_simb.cbegin(); it != tab_simb.cend(); ++it) {
+    std::cout << "{" << (*it).first << ": " << (*it).second << "}\n";
+  }
+
+  //imprime a mnt, apenas para debug por enquanto
+  std::cout << std::endl << "MNT:";
+  std::for_each(mnt.begin(), mnt.end(), print);
+  std::cout << std::endl << std::endl;
+
+  //imprime a mdt, apenas para debug por enquanto
+  std::cout << std::endl << "MDT:" << std::endl;
+  for (auto it = mdt.cbegin(); it != mdt.cend(); ++it) {
     std::cout << "{" << (*it).first << ": " << (*it).second << "}\n";
   }
 }

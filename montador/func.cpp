@@ -16,3 +16,11 @@ std::string replaceAll(std::string str, const std::string& from, const std::stri
 void print(const std::string i){
 	std::cout << i << '\n';
 }
+
+int findSubVec(std::map<std::string, std::string> mdt, std::string str){
+  int achou = 0;
+  for (auto it = mdt.cbegin(); it != mdt.cend(); ++it) {
+    if((*it).first == str) achou = 1;
+  }
+  return achou;
+}

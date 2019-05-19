@@ -13,6 +13,7 @@ Um software capaz de montar um código na linguagem Assembly Hipotética utiliza
 - [X] Capacidade de aceitar comentarios indicados pelo simbolo “;” em qualquer lugar do codigo.
 - [X] O comando COPY deve utilizar uma virgula e um espaco entre os operandos (COPY A, B).
 - [ ] Ser capaz de aceitar MACROS (mais detalhes serao descritos a seguir).
+- [X] Uma macro pode chamar outra macro.
 - [X] Poder criar um rotulo, dar quebra de linha e continuar a linha depois (o rotulo seria equivalente a linha seguinte).
 
 ### tipo de erros:
@@ -26,7 +27,7 @@ Um software capaz de montar um código na linguagem Assembly Hipotética utiliza
 - [X] divisao por zero (para constante);
 - [X] instrucoes com a quantidade de operando invalida;
 - [ ] instrucoes com o tipo de operando invalido;
-- [X] tokens invalidos;
+- [ ] tokens invalidos;
 - [X] dois rotulos na mesma linha;
 - [X] secao TEXT faltante;
 - [X] secao invalida;

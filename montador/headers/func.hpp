@@ -18,3 +18,6 @@ void print(const std::string i);
 
 // imprime no console uma mensagem de erro e a linha que ela se encontra
 void erro(std::string mensagem, int linha);
+
+//procura substring em um vetor de string
+int findSubVec(std::map<std::string, std::string>, std::string);
