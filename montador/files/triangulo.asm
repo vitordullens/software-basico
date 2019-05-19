@@ -12,7 +12,7 @@ Z:
 		ADD H B ;add com 2 args
 		IF TRIANGULO
 		ADD DOIS
-AA: DIV		DOIS
+AA: DIV		DOISF
 S: fdsa ;coisas aleatorias
 		STORE		R
 		JMP B ;pulo para secao invalida

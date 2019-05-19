@@ -1,4 +1,6 @@
-#include "pre-processador.h" // adiciona tambem a <string> e <fstream>
+#include "headers/preProcessa.hpp"
+#include "headers/primeiraPassagem.hpp"
+#include "headers/segundaPassagem.hpp"
 
 int main(int argc, char *argv[]){
   std::string entrada;
@@ -23,8 +25,42 @@ int main(int argc, char *argv[]){
   saida.append("pre");
 
   preProcessa(saida, arqEntrada);
-  primeiraPassagem(saida);
-  segundaPassagem(saida);
+
+  std::map<std::string, bool> diretivas = 
+  {
+    {"SECTION", true},
+    {"SPACE", true},
+    {"CONST", true},
+    {"EQU", true},
+    {"IF", true},
+    {"MACRO", true},
+    {"END", true},
+  };
+
+  std::map<std::string, bool> instrucoes = 
+  {
+    {"ADD", true},
+    {"SUB", true},
+    {"MULT", true},
+    {"DIV", true},
+    {"JMP", true},
+    {"JMPN", true},
+    {"JMPP", true},
+    {"JMPZ", true},
+    {"COPY", true},
+    {"LOAD", true},
+    {"STORE", true},
+    {"INPUT", true},
+    {"OUTPUT", true},
+    {"STOP", true},
+  };  
+
+  std::map<std::string, int> tab_simb;
+  std::map<std::string, int> map_constante;
+  std::map<std::string, int> map_sections;
+
+  primeiraPassagem(saida, tab_simb, map_constante, map_sections, instrucoes, diretivas);
+  segundaPassagem(saida, tab_simb, map_constante, map_sections, instrucoes, diretivas);
 
   arqEntrada.close();
 
