@@ -491,7 +491,10 @@ void segundaPassagem(std::string entrada){
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
-            parametro = std::to_string(x);
+            if(x >= map_sections["DATA"])
+              erro("Pulo para secao invalida (TIPO ERRO)", linha+1);
+            else 
+              parametro = std::to_string(x);
           }
           else
             erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
@@ -507,7 +510,10 @@ void segundaPassagem(std::string entrada){
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
-            parametro = std::to_string(x);
+            if(x >= map_sections["DATA"])
+              erro("Pulo para secao invalida (TIPO ERRO)", linha+1);
+            else 
+              parametro = std::to_string(x);
           }
           else
             erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
@@ -523,7 +529,10 @@ void segundaPassagem(std::string entrada){
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
-            parametro = std::to_string(x);
+            if(x >= map_sections["DATA"])
+              erro("Pulo para secao invalida (TIPO ERRO)", linha+1);
+            else 
+              parametro = std::to_string(x);
           }
           else
             erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);

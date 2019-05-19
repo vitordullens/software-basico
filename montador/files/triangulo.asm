@@ -16,6 +16,7 @@ AA: DIV		DOIS
 S: fdsa ;coisas aleatorias
 		STORE		R
 		JMP B ;pulo para secao invalida
+		JMPZ B
 		JMP Z
 AA:		OUTPUT	R
 		STOP B ;stop com argumentos
