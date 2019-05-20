@@ -27,3 +27,6 @@ int findSubVec(std::map<std::string, std::string>, std::string);
 
 //verifica se um identificador é válido
 int identValid(std::string);
+
+//verifica se uma string eh numero
+int strNum(std::string ident);

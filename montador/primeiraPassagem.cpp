@@ -163,13 +163,13 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
         int val;
         if(num.find("0X") != std::string::npos) 
           val = std::stoi(num,nullptr,16);
+        else if(strNum(num) == 0){
+          erro("Tipo de argumento invalido (ERRO SEMANTICO)", linha+1);
+          val = 1;
+        }
         else
           val = std::stoi(num);
-
         map_constante.insert (std::pair<std::string, int>(rotulo, val));
-        
-
-
         endereco = endereco + 1;
       }
       else if(operacao == "EQU"){

@@ -42,3 +42,17 @@ int identValid(std::string ident){
     return valid;
   }
 }
+
+int strNum(std::string ident){
+  int valid = 1;
+  //verifica se cada caractere da string eh um numero
+  if(isdigit(ident[0]) == 0 && ident[0] != '-') valid = 0;
+  else{
+    for (std::size_t i = 1; i < ident.size(); i++){
+      if(isdigit(ident[i]) == 0){
+          valid = 0;
+      }
+    }
+  }
+  return valid;
+}

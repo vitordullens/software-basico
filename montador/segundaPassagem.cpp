@@ -289,6 +289,9 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
           int val;
           if(num.find("0X") != std::string::npos) 
             val = std::stoi(num,nullptr,16);
+          else if(strNum(num) == 0){
+            val = 1;
+          }
           else
             val = std::stoi(num);
           linhas[linha] = std::to_string(val) + " ";
