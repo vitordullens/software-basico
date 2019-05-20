@@ -275,6 +275,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
           mnt.pop_back(); //apaga macro sem end da mnt
           erro("Macro sem END (TIPO ERRO)", linha);
         }
+        linha--;
       }
       /*else if(operacao == "END"){
         std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
@@ -306,7 +307,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
       str = mnt[mnt_num].substr(pos);
       str2 = linhas[linha];
       if(std::count(str2.begin(), str2.end(), ' ') != num_arg){
-        erro("Chama de macro com numero de argumentos invalido(TIPO ERRO)", linha);
+        erro("Chamada de macro com numero de argumentos invalido(TIPO ERRO)", linha);
         num_arg = 0; //expande a macro como se nao tivesse argumento
       }
       pos = pos + 3;

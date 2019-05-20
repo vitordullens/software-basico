@@ -8,8 +8,11 @@ SECTION TEXT
 		SUB &b
 		ADD &a
 		END
+		fdsa fdsa fdsa ;coisas aleatorias
 		COPY B, H, H ;teste copy com 3 args
+		fdsa fdsa fdsa ;coisas aleatorias
 	TESTESEMEND: MACRO &a, &B
+		fdsa fdsa fdsa ;coisas aleatorias
 		ADD 1
 		ADD 2
 Z:   	
