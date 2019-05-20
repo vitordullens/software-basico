@@ -28,17 +28,17 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
     if(linhas[linha].find(":") != std::string::npos){
       //verifica se tem duas labels na mesma linha. nao para a montagem
       if(std::count(linhas[linha].begin(), linhas[linha].end(), ':') > 1){
-        erro("Dois rotulos na mesma linha (TIPO DO ERRO)", linha+1);
+        erro("Dois rotulos na mesma linha (ERRO SINTATICO)", linha+1);
       }
       pos = linhas[linha].find(":");
       rotulo = linhas[linha].substr(0,pos);
       //verifica se os caracteres do rotulo sao validos
       if(identValid(rotulo) == 0){
-        erro("Rotulo com caractere invalido (TIPO DO ERRO)", linha+1);
+        erro("Rotulo com caractere invalido (ERRO LEXICO)", linha+1);
       }
-      //erro de rotulo ja definido. ainda tem q falar o tipo de erro
+      //erro de rotulo ja definido
       if(tab_simb.count(rotulo)){
-        erro("Rotulo ja definido (TIPO DO ERRO)", linha+1);
+        erro("Rotulo ja definido (ERRO SEMANTICO)", linha+1);
       }
       //insere rotulo na tabela de simbolos
       else{
@@ -142,7 +142,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
           map_sections.insert (std::pair<std::string, int>("DATA", endereco));
         }
         else{
-          erro("Secao Invalida (TIPO ERRO)", linha+1);
+          erro("Secao Invalida (ERRO SINTATICO)", linha+1);
         }
         //acho q n tem q fazer nada, so deixa ela la no arquivo pre processado
         //endereco = endereco + 0;
@@ -234,7 +234,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
           }
           //Considera no maximo 3 argumentos em uma macro
           if(arg_num >= 4){
-            erro("Macro com mais de 3 argumentos (TIPO ERRO)", linha);
+            erro("Macro com mais de 3 argumentos (ERRO SINTATICO)", linha);
             arg_num = 3;
           }
           //guarda a macro na mnt no formato: label,numero de args, arg1, arg2, arg3
@@ -264,7 +264,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
         else{
           mdt.erase(rotulo); //apaga macro sem end da mdt
           mnt.pop_back(); //apaga macro sem end da mnt
-          erro("Macro sem END (TIPO ERRO)", linha);
+          erro("Macro sem END (ERRO SINTATICO)", linha);
         }
         linha--;
       }
@@ -298,8 +298,8 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
       str = mnt[mnt_num].substr(pos);
       str2 = linhas[linha];
       if(std::count(str2.begin(), str2.end(), ' ') != num_arg){
-        erro("Chamada de macro com numero de argumentos invalido(TIPO ERRO)", linha);
-        num_arg = 0; //expande a macro como se nao tivesse argumento
+        erro("Chamada de macro com numero de argumentos invalido (ERRO SEMANTICO)", linha);
+        num_arg = 0; //expande a macro como se nao tiver argumento
       }
       pos = pos + 3;
       int pos2 = str2.find(" ");
@@ -389,7 +389,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
   }
 
   //erro secao text ausente
-  if(text == 0) erro("Secao TEXT ausente", 0);
+  if(text == 0) erro("Secao TEXT ausente (ERRO SEMANTICO)", 0);
 
   //print na tela o arquivo pre processado
   /*std::cout << std::endl << std::endl << std::endl;

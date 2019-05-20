@@ -45,10 +45,10 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
             parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "1 "+ parametro + " ";
       }
       else if(operacao == "SUB"){
@@ -60,10 +60,10 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
             parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "2 "+ parametro + " ";
       }
       else if(operacao == "MULT"){
@@ -75,10 +75,10 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
             parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "3 "+ parametro + " ";
       }
       else if(operacao == "DIV"){
@@ -87,17 +87,17 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             if(map_constante[parametro] == 0)
-              erro("Divisao por zero (TIPO ERRO)", linha+1);
+              erro("Divisao por zero (ERRO SEMANTICO)", linha+1);
             else{
               int x = tab_simb[parametro];
               parametro = std::to_string(x);
             }
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "4 "+ parametro + " ";
       }
       else if(operacao == "JMP"){
@@ -107,15 +107,15 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
             if(x >= map_sections["DATA"])
-              erro("Pulo para secao invalida (TIPO ERRO)", linha+1);
+              erro("Pulo para secao invalida (ERRO SEMANTICO)", linha+1);
             else 
               parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "5 "+ parametro + " ";
       }
       else if(operacao == "JMPN"){
@@ -125,15 +125,15 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
             if(x >= map_sections["DATA"])
-              erro("Pulo para secao invalida (TIPO ERRO)", linha+1);
+              erro("Pulo para secao invalida (ERRO SEMANTICO)", linha+1);
             else 
               parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "6 "+ parametro + " ";
       }
       else if(operacao == "JMPP"){
@@ -143,15 +143,15 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
             if(x >= map_sections["DATA"])
-              erro("Pulo para secao invalida (TIPO ERRO)", linha+1);
+              erro("Pulo para secao invalida (ERRO SEMANTICO)", linha+1);
             else 
               parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "7 "+ parametro + " ";
       }
       else if(operacao == "JMPZ"){
@@ -161,15 +161,15 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
             if(x >= map_sections["DATA"])
-              erro("Pulo para secao invalida (TIPO ERRO)", linha+1);
+              erro("Pulo para secao invalida (ERRO SEMANTICO)", linha+1);
             else 
               parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "8 "+ parametro + " ";
       }
       else if(operacao == "COPY"){
@@ -188,13 +188,13 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
               parametro2 = std::to_string(y);
             }
             else
-              erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+              erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
           }
           else
-            erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+            erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "9 "+ parametro + " " + parametro2 + " ";
       }
       else if(operacao == "LOAD"){
@@ -206,10 +206,10 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
             parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "10 "+ parametro + " ";
       }
       else if(operacao == "STORE"){
@@ -221,10 +221,10 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
             parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "11 "+ parametro + " ";
       }
       else if(operacao == "INPUT"){
@@ -236,10 +236,10 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
             parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "12 "+ parametro + " ";
       }
       else if(operacao == "OUTPUT"){
@@ -251,15 +251,15 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
             parametro = std::to_string(x);
           }
           else
-            erro("Nao achou operando na Tabela de Simbolos (TIPO ERRO)", linha+1);
+            erro("Nao achou operando na Tabela de Simbolos (ERRO SEMANTICO)", linha+1);
         }
         else 
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "13 "+ parametro + " ";
       }
       else if(operacao == "STOP"){
         if(linhas[linha].find("STOP ") != std::string::npos)
-          erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
+          erro("Numero de operandos invalido (ERRO SINTATICO)", linha+1);
         linhas[linha] = "14 ";
       }
     }
@@ -274,7 +274,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
             else
               val = std::stoi(num);
             if(val <= 0) 
-              erro("Atribuindo valor invalido ao SPACE (TIPO ERRO)", linha+1);
+              erro("Atribuindo valor invalido ao SPACE (ERRO SEMANTICO)", linha+1);
             linhas[linha] = "0 ";
             for(int i=1;i<val;i++) 
               linhas[linha] += "0 ";
