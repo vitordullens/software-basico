@@ -62,73 +62,59 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
     //verifica se a operacao eh uma instrucao
     if(instrucoes[operacao] == true){
       if(operacao == "ADD"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "SUB"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "MULT"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "DIV"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "JMP"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "JMPN"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "JMPP"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "JMPZ"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "COPY"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 3;
       }
       else if(operacao == "LOAD"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "STORE"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "INPUT"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "OUTPUT"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 2;
       }
       else if(operacao == "STOP"){
-        std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
-        //executa
+        //std::cout << "Achou operacao " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         endereco = endereco + 1;
       }
     }
@@ -140,14 +126,14 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
     else if(diretivas[operacao] == true){
       size_t end = linhas[linha].find("\n");
       if(operacao == "SECTION"){
-        std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         if(linhas[linha].substr(linhas[linha].find("SECTION ")+8, end) == "TEXT"){
-          std::cout << "Achou a secao TEXT" << std::endl;
+          //std::cout << "Achou a secao TEXT" << std::endl;
           text = 1;
           map_sections.insert (std::pair<std::string, int>("TEXT", endereco));
         }
         else if(linhas[linha].substr(linhas[linha].find("SECTION ")+8, end) == "DATA"){
-          std::cout << "Achou a secao DATA" << std::endl;
+          //std::cout << "Achou a secao DATA" << std::endl;
           map_sections.insert (std::pair<std::string, int>("DATA", endereco));
         }
         else{
@@ -157,7 +143,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
         //endereco = endereco + 0;
       }
       else if(operacao == "SPACE"){
-        std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         if(linhas[linha].find("SPACE ") != std::string::npos){
           pos = linhas[linha].find("SPACE ");
           int num = std::stoi(linhas[linha].substr(pos+6,end));
@@ -166,7 +152,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
         else endereco = endereco + 1;
       }
       else if(operacao == "CONST"){
-        std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         pos = linhas[linha].find("CONST ");
         std::string num = linhas[linha].substr(pos+6,end);
         int val;
@@ -182,7 +168,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
         endereco = endereco + 1;
       }
       else if(operacao == "EQU"){
-        std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         pos = linhas[linha].find(":");
         rotulo = linhas[linha].substr(0,pos);
         std::string equ = linhas[linha].substr(linhas[linha].find("EQU ")+4, 1); //equ so de um char por enquanto. ultimo argumento
@@ -196,7 +182,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
         //endereco = endereco + 0;
       }
       else if(operacao == "IF"){
-        std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         pos = linhas[linha].find(" ");
         int valor_if = std::stoi(linhas[linha].substr(pos+1,pos+2));
         //se o valor de if for 1, apaga a linha do if e deixa a proxima linha
@@ -213,7 +199,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
         //endereco = endereco + 0;
       }
       else if(operacao == "MACRO"){
-        std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
+        //std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << " endereco " << endereco << std::endl;
         pos = linhas[linha].find(":");
         rotulo = linhas[linha].substr(0,pos);
         pos = linhas[linha].find("MACRO ");
@@ -285,7 +271,7 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
     }
     //verifica se eh um macro
     else if(findSubVec(mdt, operacao) == 1) {
-      std::cout << "CHAMANDO MACRO " << operacao << std::endl;
+      //std::cout << "CHAMANDO MACRO " << operacao << std::endl;
       int salva_linha = linha; //salva a linha na qual a macro vai ser expandida
 
       std::string argc1, argc2, argc3; //argumentos da chamada da macro
@@ -400,9 +386,10 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
   //erro secao text ausente
   if(text == 0) erro("Secao TEXT ausente", 0);
 
-  std::cout << std::endl << std::endl << std::endl;
+  //print na tela o arquivo pre processado
+  /*std::cout << std::endl << std::endl << std::endl;
   std::cout << "Saida do programa:" << std::endl;
-  std::for_each(linhas.begin(), linhas.end(), print);
+  std::for_each(linhas.begin(), linhas.end(), print);*/
 
   //grava o arquivo pre processado
   std::ofstream arq2;
@@ -413,19 +400,19 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
 
 
   //imprime a tabela de simbolos, apenas para debug por enquanto
-  std::cout << std::endl << std::endl << "Tabela de simbolos:" << std::endl;
+  /*std::cout << std::endl << std::endl << "Tabela de simbolos:" << std::endl;
   for (auto it = tab_simb.cbegin(); it != tab_simb.cend(); ++it) {
     std::cout << "{" << (*it).first << ": " << (*it).second << "}\n";
-  }
+  }*/
 
   //imprime a mnt, apenas para debug por enquanto
-  std::cout << std::endl << "MNT:";
+  /*std::cout << std::endl << "MNT:";
   std::for_each(mnt.begin(), mnt.end(), print);
-  std::cout << std::endl << std::endl;
+  std::cout << std::endl << std::endl;*/
 
   //imprime a mdt, apenas para debug por enquanto
-  std::cout << std::endl << "MDT:" << std::endl;
+  /*std::cout << std::endl << "MDT:" << std::endl;
   for (auto it = mdt.cbegin(); it != mdt.cend(); ++it) {
     std::cout << "{" << (*it).first << ": " << (*it).second << "}\n";
-  }
+  }*/
 }

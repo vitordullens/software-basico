@@ -6,7 +6,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
   std::string str;
   std::vector<std::string> linhas;
   int linha;
-  int endereco = 0;
 
 
   arqPre.open(entrada.c_str());
@@ -18,7 +17,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
 
   for(linha = 0; linha <= (int)linhas.size()-1; linha++){
     size_t pos = 0;
-    std::string  operacao;
+    std::string operacao;
     std::string parametro;
     size_t end = linhas[linha].find("\n");
 
@@ -50,7 +49,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "01 "+ parametro + " ";
+        linhas[linha] = "1 "+ parametro + " ";
       }
       else if(operacao == "SUB"){
         pos = linhas[linha].find("SUB ");
@@ -65,7 +64,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "02 "+ parametro + " ";
+        linhas[linha] = "2 "+ parametro + " ";
       }
       else if(operacao == "MULT"){
         pos = linhas[linha].find("MULT ");
@@ -80,7 +79,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "03 "+ parametro + " ";
+        linhas[linha] = "3 "+ parametro + " ";
       }
       else if(operacao == "DIV"){
         pos = linhas[linha].find("DIV ");
@@ -99,7 +98,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "04 "+ parametro + " ";
+        linhas[linha] = "4 "+ parametro + " ";
       }
       else if(operacao == "JMP"){
         pos = linhas[linha].find("JMP ");
@@ -117,7 +116,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "05 "+ parametro + " ";
+        linhas[linha] = "5 "+ parametro + " ";
       }
       else if(operacao == "JMPN"){
         pos = linhas[linha].find("JMPN ");
@@ -135,7 +134,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "06 "+ parametro + " ";
+        linhas[linha] = "6 "+ parametro + " ";
       }
       else if(operacao == "JMPP"){
         pos = linhas[linha].find("JMPP ");
@@ -153,7 +152,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "07 "+ parametro + " ";
+        linhas[linha] = "7 "+ parametro + " ";
       }
       else if(operacao == "JMPZ"){
         pos = linhas[linha].find("JMPZ ");
@@ -171,7 +170,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "08 "+ parametro + " ";
+        linhas[linha] = "8 "+ parametro + " ";
       }
       else if(operacao == "COPY"){
         std::string parametro2;
@@ -196,7 +195,7 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         }
         else 
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "09 "+ parametro + " " + parametro2 + " ";
+        linhas[linha] = "9 "+ parametro + " " + parametro2 + " ";
       }
       else if(operacao == "LOAD"){
         pos = linhas[linha].find("LOAD ");
@@ -299,8 +298,18 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
     }
   }
 
-  std::cout << std::endl << std::endl << std::endl;
+  //imprime na tela o arquivo obj
+  /*std::cout << std::endl << std::endl << std::endl;
   std::cout << "Saida do programa:" << std::endl;
-  std::for_each(linhas.begin(), linhas.end(), printSemBarra);
+  std::for_each(linhas.begin(), linhas.end(), printSemBarra);*/
+
+  //grava o arquivo pre processado
+  std::ofstream arq2;
+  std::string saida = entrada.substr(0, entrada.size()-3);
+  saida.append("obj");
+  arq2.open(saida.c_str(), std::ofstream::trunc);
+  std::ostream_iterator<std::string> output_iterator(arq2, "");
+  std::copy(linhas.begin(), linhas.end(), output_iterator);
+  arq2.close();
 
 }

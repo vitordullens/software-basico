@@ -27,7 +27,7 @@ Um software capaz de montar um código na linguagem Assembly Hipotética utiliza
 - [X] divisao por zero (para constante);
 - [X] instrucoes com a quantidade de operando invalida;
 - [ ] instrucoes com o tipo de operando invalido;
-- [ ] tokens invalidos;
+- [X] tokens invalidos;
 - [X] dois rotulos na mesma linha;
 - [X] secao TEXT faltante;
 - [X] secao invalida;
