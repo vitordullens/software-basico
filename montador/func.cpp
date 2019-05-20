@@ -17,6 +17,10 @@ void print(const std::string i){
 	std::cout << i << '\n';
 }
 
+void printSemBarra(const std::string i){
+	std::cout << i;
+}
+
 int findSubVec(std::map<std::string, std::string> mdt, std::string str){
   int achou = 0;
   for (auto it = mdt.cbegin(); it != mdt.cend(); ++it) {

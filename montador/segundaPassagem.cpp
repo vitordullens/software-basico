@@ -40,7 +40,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       if(operacao == "ADD"){
         pos = linhas[linha].find("ADD ");
         parametro = linhas[linha].substr(pos+4, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -56,7 +55,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "SUB"){
         pos = linhas[linha].find("SUB ");
         parametro = linhas[linha].substr(pos+4, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -72,7 +70,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "MULT"){
         pos = linhas[linha].find("MULT ");
         parametro = linhas[linha].substr(pos+5, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -88,7 +85,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "DIV"){
         pos = linhas[linha].find("DIV ");
         parametro = linhas[linha].substr(pos+4, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             if(map_constante[parametro] == 0)
@@ -108,7 +104,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "JMP"){
         pos = linhas[linha].find("JMP ");
         parametro = linhas[linha].substr(pos+4, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -127,7 +122,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "JMPN"){
         pos = linhas[linha].find("JMPN ");
         parametro = linhas[linha].substr(pos+5, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -146,7 +140,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "JMPP"){
         pos = linhas[linha].find("JMPP ");
         parametro = linhas[linha].substr(pos+5, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -165,7 +158,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "JMPZ"){
         pos = linhas[linha].find("JMPZ ");
         parametro = linhas[linha].substr(pos+5, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -185,7 +177,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         std::string parametro2;
         pos = linhas[linha].find("COPY ");
         parametro = linhas[linha].substr(pos+5, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(", ") != std::string::npos){
           pos = parametro.find(" ");
           parametro2 = parametro.substr(pos+1, end);
@@ -210,7 +201,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "LOAD"){
         pos = linhas[linha].find("LOAD ");
         parametro = linhas[linha].substr(pos+5, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -226,7 +216,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "STORE"){
         pos = linhas[linha].find("STORE ");
         parametro = linhas[linha].substr(pos+6, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -242,7 +231,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "INPUT"){
         pos = linhas[linha].find("INPUT ");
         parametro = linhas[linha].substr(pos+6, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -258,7 +246,6 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
       else if(operacao == "OUTPUT"){
         pos = linhas[linha].find("OUTPUT ");
         parametro = linhas[linha].substr(pos+7, end);
-        std::cout << "Achou parametro [" << parametro << "] na operacao " << operacao << " linha " << linha+1 << std::endl;
         if (parametro.find(" ") == std::string::npos){
           if(tab_simb.count(parametro)){
             int x = tab_simb[parametro];
@@ -272,31 +259,48 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
         linhas[linha] = "13 "+ parametro + " ";
       }
       else if(operacao == "STOP"){
-        std::cout << "Achou " << operacao << " linha " << linha+1 << std::endl;
-        if(linhas[linha].find("STORE ") == std::string::npos)
+        if(linhas[linha].find("STOP ") != std::string::npos)
           erro("Numero de operandos invalido (TIPO ERRO)", linha+1);
-        linhas[linha] = "14 "+ parametro + " ";
+        linhas[linha] = "14 ";
       }
     }
     else if (diretivas[operacao] == true) {
         if(operacao == "SPACE"){
-          std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << std::endl;
           if(linhas[linha].find("SPACE ") != std::string::npos){
             pos = linhas[linha].find("SPACE ");
-            int num = std::stoi(linhas[linha].substr(pos+6,end));
+            std::string num = linhas[linha].substr(pos+6,end);
+            int val;
+            if(num.find("0X") != std::string::npos) 
+              val = std::stoi(num,nullptr,16);
+            else
+              val = std::stoi(num);
+            if(val <= 0) 
+              erro("Atribuindo valor invalido ao SPACE (TIPO ERRO)", linha+1);
+            linhas[linha] = "0";
+            for(int i=1;i<val;i++) 
+              linhas[linha] += "0";
+            linhas[linha] += " ";
           }
+          else 
+            linhas[linha] = "0 ";
         }
         else if(operacao == "CONST"){
-          std::cout << "Achou diretiva " << operacao << " na linha " << linha+1 << std::endl;
           pos = linhas[linha].find("CONST ");
           std::string num = linhas[linha].substr(pos+6,end);
+          int val;
+          if(num.find("0X") != std::string::npos) 
+            val = std::stoi(num,nullptr,16);
+          else
+            val = std::stoi(num);
+          linhas[linha] = std::to_string(val) + " ";
           
         }
+        else if(operacao == "SECTION") linhas[linha] = "";
     }
   }
 
   std::cout << std::endl << std::endl << std::endl;
   std::cout << "Saida do programa:" << std::endl;
-  std::for_each(linhas.begin(), linhas.end(), print);
+  std::for_each(linhas.begin(), linhas.end(), printSemBarra);
 
 }
