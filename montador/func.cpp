@@ -28,3 +28,17 @@ int findSubVec(std::map<std::string, std::string> mdt, std::string str){
   }
   return achou;
 }
+
+int identValid(std::string ident){
+  int valid = 1;
+  if(isdigit(ident[0]) != 0) return 0; //verifica se comeca com numero
+  else{
+    //verifica se cada caractere da string eh alfanumerico ou _
+    for (std::size_t i = 0; i < ident.size(); i++){
+      if((ident[i] < 'A' || ident[i] > 'Z') && ident[i] != '_' && (ident[i] < '0' || ident[i] > '9')){
+          valid = 0;
+      }
+    }
+    return valid;
+  }
+}

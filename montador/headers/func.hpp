@@ -24,3 +24,6 @@ void erro(std::string mensagem, int linha);
 
 //procura substring em um vetor de string
 int findSubVec(std::map<std::string, std::string>, std::string);
+
+//verifica se um identificador é válido
+int identValid(std::string);

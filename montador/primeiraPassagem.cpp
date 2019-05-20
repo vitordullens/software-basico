@@ -32,10 +32,15 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
       }
       pos = linhas[linha].find(":");
       rotulo = linhas[linha].substr(0,pos);
+      //verifica se os caracteres do rotulo sao validos
+      if(identValid(rotulo) == 0){
+        erro("Rotulo com caractere invalido (TIPO DO ERRO)", linha+1);
+      }
       //erro de rotulo ja definido. ainda tem q falar o tipo de erro
       if(tab_simb.count(rotulo)){
         erro("Rotulo ja definido (TIPO DO ERRO)", linha+1);
       }
+      //insere rotulo na tabela de simbolos
       else{
         //std::cout << "Rotulo " << rotulo << " marcado com endereco " << endereco << std::endl;
         tab_simb.insert (std::pair<std::string, int>(rotulo,endereco));
