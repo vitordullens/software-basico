@@ -275,10 +275,10 @@ void segundaPassagem(std::string entrada, std::map<std::string, int> &tab_simb, 
               val = std::stoi(num);
             if(val <= 0) 
               erro("Atribuindo valor invalido ao SPACE (TIPO ERRO)", linha+1);
-            linhas[linha] = "0";
+            linhas[linha] = "0 ";
             for(int i=1;i<val;i++) 
-              linhas[linha] += "0";
-            linhas[linha] += " ";
+              linhas[linha] += "0 ";
+            //linhas[linha] += " ";
           }
           else 
             linhas[linha] = "0 ";
