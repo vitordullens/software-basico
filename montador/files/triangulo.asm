@@ -3,10 +3,10 @@ SECTION TEXT
 		TRIANGULO: EQU 1
 		INPUT		H
 	TESTE2: MACRO &a, &b, &c
-		ADD 1
+		ADD &c
 		fsafdsa
-		SUB 2
-		ADD 2
+		SUB &b
+		ADD &a
 		END
 		COPY B, H, H ;teste copy com 3 args
 	TESTESEMEND: MACRO &a, &B
@@ -18,12 +18,12 @@ Z:
 		DIV zero ;divide por 0
 	TESTE3: MACRO
 		ADD 5
-		TESTE2
+		TESTE2 G H J
 		SUB 5
 		END
 		fdsa fdsa fdsa ;coisas aleatorias
 		MULT		H
-		TESTE2
+		TESTE2 G H J
 		ADD H B ;add com 2 args
 		TESTE3
 		IF TRIANGULO

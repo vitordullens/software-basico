@@ -287,23 +287,75 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
       std::cout << "CHAMANDO MACRO " << operacao << std::endl;
       int salva_linha = linha; //salva a linha na qual a macro vai ser expandida
 
+      std::string argc1, argc2, argc3; //argumentos da chamada da macro
+      std::string arg1, arg2, arg3; //argumentos dentro da macro
+
       //procura macro na mnt
       int mnt_num = 0;
-      std::string arg1, arg2, arg3;
       for(std::size_t i = 0; i < mnt.size(); ++i){
         if(mnt[i].find(operacao) != std::string::npos){
           mnt_num = i;
           break;
         }
       }
-      pos = mnt[mnt_num].find(",")+1;
-      //std::cout << "--------POS: " << pos << " " << mnt[mnt_num][pos] << std::endl;
-      //if(std::stoi(mnt[mnt_num][pos]) > 0){
-        //std::cout << "ARGS MAIOR Q ZERO" << std::endl;
-      //}
 
       pos = mnt[mnt_num].find(",");
+      std::string str;
+      std::string str2;
       int num_arg = std::stoi(mnt[mnt_num].substr(pos+1, 1));
+      str = mnt[mnt_num].substr(pos);
+      str2 = linhas[linha];
+      if(std::count(str2.begin(), str2.end(), ' ') != num_arg){
+        erro("Chama de macro com numero de argumentos invalido(TIPO ERRO)", linha);
+        num_arg = 0; //expande a macro como se nao tivesse argumento
+      }
+      pos = pos + 3;
+      int pos2 = str2.find(" ");
+      if(num_arg == 1){
+        str = mnt[mnt_num].substr(pos);
+        str2 = str2.substr(pos2+1);
+        int tam_arg = str.find(',');
+        int tam_arg2 = str2.find(' ');
+        arg1 = str.substr(0, tam_arg);
+        argc1 = str2.substr(0, tam_arg2);
+      }
+      if(num_arg == 2){
+        str = mnt[mnt_num].substr(pos);
+        str2 = str2.substr(pos2+1);
+        int tam_arg = str.find(',');
+        int tam_arg2 = str2.find(' ');
+        arg1 = str.substr(0, tam_arg);
+        argc1 = str2.substr(0, tam_arg2);
+
+        str = str.substr(tam_arg+1);
+        str2 = str2.substr(tam_arg2+1);
+        tam_arg = str.find(',');
+        tam_arg2 = str2.find(' ');
+        arg2 = str.substr(0, tam_arg);
+        argc2 = str2.substr(0, tam_arg2);
+      }
+      if(num_arg == 3){
+        str = mnt[mnt_num].substr(pos);
+        str2 = str2.substr(pos2+1);
+        int tam_arg = str.find(',');
+        int tam_arg2 = str2.find(' ');
+        arg1 = str.substr(0, tam_arg);
+        argc1 = str2.substr(0, tam_arg2);
+
+        str = str.substr(tam_arg+1);
+        str2 = str2.substr(tam_arg2+1);
+        tam_arg = str.find(',');
+        tam_arg2 = str2.find(' ');
+        arg2 = str.substr(0, tam_arg);
+        argc2 = str2.substr(0, tam_arg2);
+
+        str = str.substr(tam_arg+1);
+        str2 = str2.substr(tam_arg2+1);
+        tam_arg = str.find(',');
+        tam_arg2 = str2.find(' ');
+        arg3 = str.substr(0, tam_arg);
+        argc3 = str2.substr(0, tam_arg2);
+      }
 
       linhas.erase(linhas.begin()+linha);
       std::string str_aux, str_aux2;
@@ -317,6 +369,18 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
       while(str_aux.find(";") != std::string::npos){
         pos = 0;
         str_aux2 = str_aux.substr(pos, str_aux.find(";"));
+        if(num_arg == 1){
+          str_aux2 = replaceAll(str_aux2, arg1, argc1);
+        }
+        if(num_arg == 2){
+          str_aux2 = replaceAll(str_aux2, arg1, argc1);
+          str_aux2 = replaceAll(str_aux2, arg2, argc2);
+        }
+        if(num_arg == 3){
+          str_aux2 = replaceAll(str_aux2, arg1, argc1);
+          str_aux2 = replaceAll(str_aux2, arg2, argc2);
+          str_aux2 = replaceAll(str_aux2, arg3, argc3);
+        }
         linhas.insert(linhas.begin()+linha, str_aux2);
         linha++;
         pos = str_aux.find(";");

@@ -12,7 +12,7 @@ Um software capaz de montar um código na linguagem Assembly Hipotética utiliza
 - [ ] Deve ser possıvel trabalhar com vetores (SPACE com operando, e usar operacoes do tipo: LABEL + Numero, colocando espaco entre o ’+’).
 - [X] Capacidade de aceitar comentarios indicados pelo simbolo “;” em qualquer lugar do codigo.
 - [X] O comando COPY deve utilizar uma virgula e um espaco entre os operandos (COPY A, B).
-- [ ] Ser capaz de aceitar MACROS (mais detalhes serao descritos a seguir).
+- [X] Ser capaz de aceitar MACROS (mais detalhes serao descritos a seguir).
 - [X] Uma macro pode chamar outra macro.
 - [X] Poder criar um rotulo, dar quebra de linha e continuar a linha depois (o rotulo seria equivalente a linha seguinte).
 
