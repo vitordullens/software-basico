@@ -383,8 +383,6 @@ void primeiraPassagem(std::string entrada, std::map<std::string, int> &tab_simb,
     //diretiva ou instrucao invalida
     else{
       erro("Instrucao ou diretiva invalida (ERRO LEXICO)", linha+1);
-      linhas.erase(linhas.begin()+linha);
-      linha--;
     }
   }
 
