@@ -73,6 +73,10 @@ int main(int argc, char *argv[]){
       operacao = operacao.substr(0,pos);
       if(linhas[linha].substr(linhas[linha].find("SECTION ")+8, end) == "TEXT"){
         linhas2.insert(linhas2.begin()+linha2, "section .text");
+        linha2++;
+        linhas2.insert(linhas2.begin()+linha2, "global _start");
+        linha2++;
+        linhas2.insert(linhas2.begin()+linha2, "_start:");
       }
       else if(linhas[linha].substr(linhas[linha].find("SECTION ")+8, end) == "DATA"){
         linhas2.insert(linhas2.begin()+linha2, "section .data");
@@ -81,7 +85,23 @@ int main(int argc, char *argv[]){
     }
     else if(operacao == "SPACE"){
       label.erase(label.length()-2, label.length()-2);
-      linhas2.insert(linhas2.begin()+linha2, label + " dd 0");
+      if(linhas[linha].find("SPACE ") != std::string::npos){
+        pos = linhas[linha].find("SPACE ");
+        std::string num = linhas[linha].substr(pos+6,end);
+        int val;
+        if(num.find("0X") != std::string::npos) 
+          val = std::stoi(num,nullptr,16);
+        else
+          val = std::stoi(num);
+        std::string zeros = "0";
+        for(int z = 1; z < val; z++)
+          zeros += "0";
+        linhas2.insert(linhas2.begin()+linha2, label + " dd " + zeros);
+      }
+      else{
+        label.erase(label.length()-2, label.length()-2);
+        linhas2.insert(linhas2.begin()+linha2, label + " dd 0");
+      }
       linha2++;
     }
     else if(operacao == "CONST"){
@@ -121,6 +141,63 @@ int main(int argc, char *argv[]){
       linhas2.insert(linhas2.begin()+linha2, "idiv ebx");
       linha2++;
     }
+    else if(operacao == "JMP"){
+      pos = linhas[linha].find("JMP ");
+      std::string num = linhas[linha].substr(pos+4,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "jmp " + num );
+      linha2++;
+    }
+    else if(operacao == "JMPN"){
+      pos = linhas[linha].find("JMPN ");
+      std::string num = linhas[linha].substr(pos+5,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "cmp eax, 0");
+      linha2++;
+      linhas2.insert(linhas2.begin()+linha2, "jl " + num);
+      linha2++;
+    }
+    else if(operacao == "JMPP"){
+      pos = linhas[linha].find("JMPP ");
+      std::string num = linhas[linha].substr(pos+5,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "cmp eax, 0");
+      linha2++;
+      linhas2.insert(linhas2.begin()+linha2, "jg " + num);
+      linha2++;
+    }
+    else if(operacao == "JMPZ"){
+      pos = linhas[linha].find("JMPZ ");
+      std::string num = linhas[linha].substr(pos+5,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "cmp eax, 0");
+      linha2++;
+      linhas2.insert(linhas2.begin()+linha2, "je " + num);
+      linha2++;
+    }
+    else if(operacao == "COPY"){
+        std::string num2;
+        pos = linhas[linha].find("COPY ");
+        std::string num = linhas[linha].substr(pos+5, end);
+        if (num.find(", ") != std::string::npos){
+          pos = num.find(" ");
+          num2 = num.substr(pos+1, end);
+          num = num.substr(0, pos-1);
+        }
+        linhas2.insert(linhas2.begin()+linha2, label + "mov eax, [" + num + "]");
+        linha2++;
+        linhas2.insert(linhas2.begin()+linha2, "mov [" + num2 + "], eax");
+        linha2++;
+    }
+    else if(operacao == "LOAD"){
+      pos = linhas[linha].find("LOAD ");
+      std::string num = linhas[linha].substr(pos+5,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "add eax, " + "[" + num + "]");
+      linha2++;
+    }
+    else if(operacao == "STORE"){
+      pos = linhas[linha].find("STORE ");
+      std::string num = linhas[linha].substr(pos+6,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "add eax, " + "[" + num + "]");
+      linha2++;
+    }
+    //agr é os de ler e escrever la
   }
 
   arqSaida.open(saida.c_str(), std::ofstream::trunc);
