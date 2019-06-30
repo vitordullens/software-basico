@@ -8,6 +8,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include "headers/preProcessa.hpp"
 
 int main(int argc, char *argv[]){
   std::string entrada;
@@ -30,7 +31,22 @@ int main(int argc, char *argv[]){
   }
 
   saida = entrada.substr(0, entrada.size()-3);
+  saida.append("pre");
+  preProcessa(saida, arqEntrada);
+
+  saida = entrada.substr(0, entrada.size()-3);
   saida.append("s");
+
+  arqEntrada.close();
+
+  entrada = entrada.substr(0, entrada.size()-3);
+  entrada.append("pre");
+
+  arqEntrada.open(entrada.c_str());
+  if (!arqEntrada){
+    std::cerr << "Nao foi possivel abrir o arquivo pre processado " << entrada << std::endl;
+    return -1;
+  }
 
   std::vector<std::string> linhas, linhas2;
   std::string str, operacao;
