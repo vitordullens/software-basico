@@ -17,6 +17,9 @@ mov [OLD_DATA], eax
 add eax, [OLD_DATA]
 cmp eax, 0
 jg L1
+mov eax, 1
+mov ebx, 0
+int 80h
 section .data
 DOIS dd 2
 OLD_DATA dd 00

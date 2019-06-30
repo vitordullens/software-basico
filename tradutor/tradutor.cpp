@@ -63,7 +63,7 @@ int main(int argc, char *argv[]){
   arqEntrada.close();
 
   for(linha = 0; linha <= (int)linhas.size()-1; linha++){
-    std::cout << "Lendo linha: " << linhas[linha] << std::endl;
+    //std::cout << "Lendo linha: " << linhas[linha] << std::endl;
     size_t end = linhas[linha].find("\n");
     /*
     PROCURA INSTRUCOES
@@ -211,6 +211,16 @@ int main(int argc, char *argv[]){
       pos = linhas[linha].find("STORE ");
       std::string num = linhas[linha].substr(pos+6,end);
       linhas2.insert(linhas2.begin()+linha2, label + "add eax, " + "[" + num + "]");
+      linha2++;
+    }
+    else if(operacao == "STOP"){
+      pos = linhas[linha].find("STOP ");
+      std::string num = linhas[linha].substr(pos+5,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "mov eax, 1");
+      linha2++;
+      linhas2.insert(linhas2.begin()+linha2, label + "mov ebx, 0");
+      linha2++;
+      linhas2.insert(linhas2.begin()+linha2, label + "int 80h");
       linha2++;
     }
     //agr é os de ler e escrever la
