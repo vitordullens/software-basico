@@ -253,6 +253,14 @@ int main(int argc, char *argv[]){
       linhas2.insert(linhas2.begin()+linha2, "call C_Output");
       linha2++;
     }
+    else if(operacao == "H_OUTPUT"){
+      pos = linhas[linha].find("H_OUTPUT ");
+      std::string num = linhas[linha].substr(pos+9,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "push " + num);
+      linha2++;
+      linhas2.insert(linhas2.begin()+linha2, "call H_Output");
+      linha2++;
+    }
     else if(operacao == "S_OUTPUT"){
       pos = linhas[linha].find("S_OUTPUT ");
       std::string num = linhas[linha].substr(pos+9,end);
@@ -271,23 +279,31 @@ int main(int argc, char *argv[]){
     }
     else if(operacao == "INPUT"){
       pos = linhas[linha].find("INPUT ");
-      std::string num = linhas[linha].substr(pos+5,end);
-      linhas2.insert(linhas2.begin()+linha2, label + "push" + num);
+      std::string num = linhas[linha].substr(pos+6,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "push " + num);
       linha2++;
       linhas2.insert(linhas2.begin()+linha2, "call I_Input");
       linha2++;
     }
     else if(operacao == "C_INPUT"){
       pos = linhas[linha].find("C_INPUT ");
-      std::string num = linhas[linha].substr(pos+7,end);
-      linhas2.insert(linhas2.begin()+linha2, label + "push" + num);
+      std::string num = linhas[linha].substr(pos+8,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "push " + num);
       linha2++;
       linhas2.insert(linhas2.begin()+linha2, "call C_Input");
       linha2++;
     }
+    else if(operacao == "H_INPUT"){
+      pos = linhas[linha].find("H_INPUT ");
+      std::string num = linhas[linha].substr(pos+8,end);
+      linhas2.insert(linhas2.begin()+linha2, label + "push " + num);
+      linha2++;
+      linhas2.insert(linhas2.begin()+linha2, "call H_Input");
+      linha2++;
+    }
     else if(operacao == "S_INPUT"){
-      pos = linhas[linha].find("S_OUTPUT ");
-      std::string num = linhas[linha].substr(pos+9,end);
+      pos = linhas[linha].find("S_INPUT ");
+      std::string num = linhas[linha].substr(pos+8,end);
       std::string num2;
       if (num.find(", ") != std::string::npos){
           pos = num.find(" ");

@@ -4,6 +4,7 @@ char    resb 1
 string  resd 5
 var1    resd 1
 var2    resd 1
+hexMask db "0123456789ABCDEF"
 
 section .text
 global I_Input
@@ -168,9 +169,106 @@ C_Output:
                 ret
 
 H_Input:
+                push ebp
+                mov ebp, esp
+                push ebx
+                push ecx
+                push edx
+                mov ebx, 0
+                mov ecx, string
+                mov eax, 3
+                mov edx, 8
+                int 80h
+                mov eax, 0
+                mov ecx, 0
+                mov edx, 0
+        transHex:
+                mov dl, [string + ecx]
+                cmp edx, 0x0A
+                je fimHex
+                cmp ecx, 8
+                je fimHex
+                cmp edx, 0x39
+                jbe is_hex_digit
+                cmp edx, 0x5A
+                jbe transMinusc
+                ; Lowercase
+                sub dl, 0x61
+                add dl, 10
+                jmp loop1Hex
+        transMinusc:
+                sub dl, 0x41
+                add dl, 10
+                jmp loop1Hex
+        is_hex_digit:
+                sub dl, 0x30
+        loop1Hex:
+                shl eax, 4
+                add eax, edx
+                inc ecx
+                jmp transHex
+        fimHex:
+                mov edx, dword [ebp+8]
+                mov [edx], eax
+                mov eax, ecx
+                pop ecx
+                pop ebx
+                pop edx
+                mov ebp, esp
+                pop ebp
                 ret
 
 H_Output:
+                push ebp
+                mov ebp, esp
+                push esi
+                push ecx
+                push edx
+                push ebx
+                mov esi, dword [ebp+8]
+                mov edx, [esi]
+                mov ecx, 0
+                mov ebx, 16
+                cmp edx, 0
+                jne difZero
+                push byte 0x30
+                inc ecx
+                jmp printHex
+        difZero:
+                cmp edx, 0
+                je printHex
+                sub eax, eax
+                mov al, dl
+                and al, 0x0F
+                mov ebx, hexMask
+                xlatb
+                push ax
+                inc ecx
+                shr edx, 4
+                jmp difZero
+        printHex:
+                sub ebx, ebx
+        printRep:
+                cmp ebx, ecx
+                je fimOutHex
+                pop dx
+                mov byte [string + ebx], dl
+                inc ebx
+                jmp printRep
+        fimOutHex:
+                push ecx
+                mov eax, 4
+                mov ebx, 1
+                mov edx, ecx
+                mov ecx, string
+                int 80h
+                pop eax
+                pop ebx
+                pop edx
+                pop ecx
+                pop esi
+                mov ebp, esp
+                pop ebp
                 ret
 
 S_Input:

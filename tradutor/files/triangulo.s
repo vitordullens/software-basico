@@ -319,33 +319,25 @@ S_Output:
                 ret
 section .text
 _start:
-push OLD_DATA
+push B
 call I_Input
-mov eax, [OLD_DATA]
-L1: mov ebx, [DOIS]
-idiv ebx
-mov [NEW_DATA], eax
+push H
+call I_Input
+mov eax, [B]
 sub edx, edx
-mov ebx, [DOIS]
+mov ebx, [H]
 imul ebx
-mov [TMP_DATA], eax
-mov eax, [OLD_DATA]
-sub eax, [TMP_DATA]
-mov [TMP_DATA], eax
-mov eax, [TMP_DATA]
+mov ebx, [DOIS]
+idiv ebx
+mov [R], eax
+mov eax, [R]
 push eax
 call I_Output
-mov eax, [NEW_DATA]
-mov [OLD_DATA], eax
-mov eax, [OLD_DATA]
-cmp eax, 0
-jg L1
 mov eax, 1
 mov ebx, 0
 int 80h
 section .data
+B dd 0
+H dd 0
+R dd 0
 DOIS dd 2
-OLD_DATA dd 00
-NEW_DATA dd 0
-TMP_DATA dd 000000
-SLA_DATA dd 0
